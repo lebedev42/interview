@@ -1,0 +1,93 @@
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  background-color: #f5f5f5;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.site-layout {
+  min-height: 100vh;
+}
+
+.site-layout-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 280px;
+}
+
+.ant-layout-header {
+  display: flex;
+  align-items: center;
+}
+
+.header-title {
+  color: white;
+  margin: 0 0 0 12px;
+  flex-grow: 1;
+}
+
+/* Стили для markdown-контента */
+.markdown-content h1 {
+  border-bottom: 1px solid #eaecef;
+  padding-bottom: 0.3em;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.markdown-content h2 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #eaecef;
+}
+
+.markdown-content p {
+  margin-top: 0;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.markdown-content pre {
+  background-color: transparent;
+}
+
+.focused-item {
+  background-color: rgba(24, 144, 255, 0.1);
+  outline: 2px solid #1890ff;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.category-header.focused-item {
+  padding: 4px;
+  margin: -4px;
+}
+
+.keyboard-navigation-help {
+  margin-bottom: 16px;
+  padding: 8px;
+  background-color: #f0f2f5;
+  border-radius: 4px;
+  color: #525252;
+  font-size: 13px;
+}
+
+/* Стили для ссылок в списке вопросов */
+.ant-list-item a {
+  display: block;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.85);
+  transition: color 0.3s;
+}
+
+.ant-list-item a:hover {
+  color: #1890ff;
+}
+
+.ant-list-item.focused-item a {
+  color: #1890ff;
+} 

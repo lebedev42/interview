@@ -1,0 +1,68 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main # или master в зависимости от вашей ветки по умолчанию
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository }}:latest
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Создаем директорию, если её нет
+            mkdir -p ${{ secrets.SSH_TARGET_DIR }}
+            cd ${{ secrets.SSH_TARGET_DIR }}
+
+            # Создаем или обновляем docker-compose.yml
+            cat > docker-compose.yml << 'EOL'
+            version: '3'
+
+            services:
+              app:
+                image: ghcr.io/${{ github.repository }}:latest
+                restart: always
+                ports:
+                  - "8080:80"  # Порт можно изменить на нужный
+                volumes:
+                  - ./nginx-logs:/var/log/nginx
+            EOL
+
+            # Авторизация в GitHub Container Registry если нужно
+            echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+
+            # Загрузка последнего образа и запуск
+            docker-compose pull
+            docker-compose down
+            docker-compose up -d
+
+            # Очистка неиспользуемых образов
+            docker image prune -f

@@ -1,0 +1,210 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.site-layout-content {
+  padding: 24px;
+  min-height: calc(100vh - 64px);
+}
+
+/* Стили для темной темы */
+.dark-theme .site-layout-content {
+  background-color: #1f1f1f;
+}
+
+/* Стили для светлой темы */
+.light-theme .site-layout-content {
+  background-color: #ffffff;
+}
+
+/* Плавный переход для всех компонентов */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Стили для заголовка */
+.header-title {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: font-size 0.3s ease;
+}
+
+.header-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #1890ff;
+  transition: width 0.3s ease;
+}
+
+.header-title:hover:after {
+  width: 100%;
+}
+
+/* Стили для мобильного меню */
+.ant-dropdown-menu {
+  padding: 12px;
+  min-width: 250px;
+}
+
+.ant-dropdown-menu-item {
+  padding: 12px !important;
+}
+
+/* Стили для кастомного выпадающего меню на мобильных устройствах */
+.custom-dropdown {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 6px 16px -8px rgba(0,0,0,0.08), 
+              0 9px 28px 0 rgba(0,0,0,0.05), 
+              0 12px 48px 16px rgba(0,0,0,0.03);
+}
+
+/* Стили для темной темы дропдауна */
+.dark-theme .custom-dropdown {
+  background: #1f1f1f;
+}
+
+.dark-theme .ant-dropdown-menu {
+  background: #1f1f1f;
+}
+
+.dark-theme .ant-dropdown-menu-item {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Повышаем z-index для выпадающего списка Select внутри дропдауна */
+body .ant-select-dropdown {
+  z-index: 1100 !important;
+}
+
+/* Насильно применяем изменения stacking context для корректной работы z-index */
+.mobile-select-container {
+  position: relative;
+  z-index: 1050;
+}
+
+.mobile-select-container .ant-select {
+  position: relative;
+  z-index: inherit;
+}
+
+/* Корректируем стили выпадающего меню */
+body div.ant-select-dropdown {
+  z-index: 1100 !important;
+  position: absolute !important;
+}
+
+/* Специальный класс для переопределения z-index выпадающего списка */
+.select-dropdown-override {
+  z-index: 9999 !important;
+}
+
+/* Стили для портала Select */
+#select-portal-container {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  overflow: visible;
+}
+
+#select-portal-container .ant-select {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px !important;
+  z-index: 9999 !important;
+}
+
+#select-portal-container .ant-select-dropdown {
+  z-index: 9999 !important;
+}
+
+/* Стили для темной темы выпадающего списка */
+.dark-theme #select-portal-container .ant-select-dropdown {
+  background-color: #1f1f1f;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Предотвращаем закрытие дропдауна при клике на Select */
+.ant-select, 
+.ant-select-selector,
+.ant-select-selection-search {
+  position: relative;
+}
+
+/* Адаптация заголовка для мобильных устройств */
+@media screen and (max-width: 1024px) {
+  .ant-layout-header {
+    padding: 0 16px !important;
+  }
+  
+  .header-title {
+    font-size: 18px !important;
+  }
+  
+  .site-layout-content {
+    padding: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header-title {
+    font-size: 16px !important;
+    max-width: 260px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+/* Медиа запросы, которые больше не нужны из-за нового подхода с выпадающим меню */
+/* Закомментировано, чтобы можно было при необходимости вернуть или использовать части кода
+@media screen and (max-width: 1024px) {
+  .ant-layout-header {
+    flex-direction: column;
+    height: auto !important;
+    padding: 12px 20px !important;
+  }
+  
+  .ant-layout-header h4 {
+    margin-bottom: 12px !important;
+    text-align: center;
+    font-size: 16px !important;
+  }
+  
+  .ant-layout-header .ant-space {
+    margin-bottom: 8px;
+  }
+  
+  .site-layout-content {
+    min-height: calc(100vh - 120px) !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .ant-layout-header .ant-space-split {
+    flex-direction: column;
+  }
+  
+  .ant-layout-header .ant-divider {
+    height: 1px;
+    width: 100%;
+    margin: 8px 0;
+  }
+}
+*/ 
