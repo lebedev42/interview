@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getCategories, Category } from "../utils/questionsLoader";
 import { QuestionCircleOutlined, ReadOutlined } from "@ant-design/icons";
 
-const { Title, Paragraph } = Typography;
+const { Paragraph } = Typography;
 const { Panel } = Collapse;
 
 interface FocusableItem {

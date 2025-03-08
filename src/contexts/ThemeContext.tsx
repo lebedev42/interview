@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import * as prismStyles from "react-syntax-highlighter/dist/esm/styles/prism";
-import { theme } from "antd";
 
 // Определение типов для темы подсветки кода
 type ThemeNames = keyof typeof prismStyles;
