@@ -134,7 +134,10 @@ const QuestionPage: React.FC = () => {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              marginTop: 20
+              marginTop: 20,
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 8
             }}
           >
             <Button
