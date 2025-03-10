@@ -114,6 +114,7 @@ const QuestionPage: React.FC = () => {
                       style={currentTheme}
                       language={match[1]}
                       PreTag="div"
+                      CodeTag="div"
                       {...props}
                     >
                       {String(children).replace(/\n$/, "")}
